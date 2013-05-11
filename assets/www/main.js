@@ -25,6 +25,7 @@ var deviceInfo = function() {
     document.getElementById("width").innerHTML = screen.width;
     document.getElementById("height").innerHTML = screen.height;
     document.getElementById("colorDepth").innerHTML = screen.colorDepth;
+    console.log("Device info run");
 };
 
 var getLocation = function() {
@@ -149,7 +150,7 @@ function toggleCompass() {
         navigator.compass.clearWatch(watchID);
         watchID = null;
         updateHeading({ magneticHeading : "Off"});
-    } else {        
+    } else {
         var options = { frequency: 1000 };
         watchID = navigator.compass.watchHeading(updateHeading, function(e) {
             alert('Compass Error: ' + e.code);

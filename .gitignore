@@ -3,3 +3,4 @@ bin/*
 gen
 *.keystore
 ant.properties
+*swp
