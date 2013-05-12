@@ -72,7 +72,7 @@ $.ui.ready(function () {
               destinationType: Camera.DestinationType.FILE_URI,
               sourceType: navigator.camera.PictureSourceType.CAMERA,
               encodingType: navigator.camera.EncodingType.JPEG,
-              cameraDirection: navigator.camera.Direction.FRONT
+              cameraDirection: navigator.camera.Direction.FRONT // seems to have no effect
             }
         );
     }

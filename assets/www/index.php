@@ -22,7 +22,6 @@
                             <a href="#" id="btnScan" class="icon target big">Scan barcode on bottle</a>
                         </li>
                     </ul>
-
                     <img width="100%" src="" id="face" />
 
                     <p class="instructions">

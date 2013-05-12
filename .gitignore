@@ -4,3 +4,5 @@ gen
 *.keystore
 ant.properties
 *swp
+assets/www/js/all.js
+assets/www/index.html
