@@ -6833,61 +6833,78 @@ require('cordova/channel').onNativeReady.fire();
 
 
 
-})();/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+})();/**
+ * cordova is available under *either* the terms of the modified BSD license *or* the
+ * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Copyright (c) Matt Kane 2010
+ * Copyright (c) 2011, IBM Corporation
  */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
 
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+cordova.define("cordova/plugins/barcodescanner", 
+  function(require, exports, module) {
+    var exec = require("cordova/exec");
+    var BarcodeScanner = function() {};
+    
+    //-------------------------------------------------------------------
+    BarcodeScanner.prototype.scan = function(successCallback, errorCallback) {
+        if (errorCallback == null) { errorCallback = function() {}}
+    
+        if (typeof errorCallback != "function")  {
+            console.log("BarcodeScanner.scan failure: failure parameter not a function");
+            return
+        }
+    
+        if (typeof successCallback != "function") {
+            console.log("BarcodeScanner.scan failure: success callback parameter must be a function");
+            return
+        }
+    
+        exec(successCallback, errorCallback, 'BarcodeScanner', 'scan', []);
+    };
+    
+    //-------------------------------------------------------------------
+    BarcodeScanner.prototype.encode = function(type, data, successCallback, errorCallback, options) {
+        if (errorCallback == null) { errorCallback = function() {}}
+    
+        if (typeof errorCallback != "function")  {
+            console.log("BarcodeScanner.scan failure: failure parameter not a function");
+            return
+        }
+    
+        if (typeof successCallback != "function") {
+            console.log("BarcodeScanner.scan failure: success callback parameter must be a function");
+            return
+        }
+    
+        exec(successCallback, errorCallback, 'BarcodeScanner', 'encode', [{"type": type, "data": data, "options": options}]);
+    };
+    
+    var barcodeScanner = new BarcodeScanner();
+    module.exports = barcodeScanner;
 
-        alert("Device is ready");
-    },
+});
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+cordova.define("cordova/plugin/BarcodeConstants", 
+    function(require, exports, module) {
+    module.exports = {
+        Encode:{
+            TEXT_TYPE: "TEXT_TYPE",
+            EMAIL_TYPE: "EMAIL_TYPE",
+            PHONE_TYPE: "PHONE_TYPE",
+            SMS_TYPE: "SMS_TYPE",
+        }
+    };        
+});
+//-------------------------------------------------------------------
+var BarcodeScanner = cordova.require('cordova/plugin/BarcodeConstants');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();/*
+if(!window.plugins) {
+    window.plugins = {};
+}
+if (!window.plugins.barcodeScanner) {
+    window.plugins.barcodeScanner = cordova.require("cordova/plugins/barcodescanner");
+}/*
  Intel
  @api private
 */
@@ -7117,3 +7134,120 @@ g;c.availableTransitions["default"]=g})(jq.ui);
 time:"150ms",complete:function(f){f?h.finishTransition(c,k):(h.clearAnimations(k),h.css3animate(c,{x:"-100%",y:0,complete:function(){h.finishTransition(c)}}))}})}}))}})(jq.ui);
 (function(c){c.availableTransitions.up=function(c,k,f){c.style.display="block";k.style.display="block";var h=this;f?(k.style.zIndex=1,c.style.zIndex=2,h.clearAnimations(k),h.css3animate(c,{y:"100%",x:"0%",time:"150ms",complete:function(){h.finishTransition(c);k.style.zIndex=2;c.style.zIndex=1}})):(k.style.zIndex=2,c.style.zIndex=1,h.css3animate(k,{y:"100%",x:"0%",complete:function(){h.css3animate(k,{y:"0%",x:"0%",time:"150ms",complete:function(f){f?h.finishTransition(c,k):(h.clearAnimations(k),h.css3animate(c,
 {x:"-100%",y:0,complete:function(){h.finishTransition(c)}}))}})}}))}})(jq.ui);
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+//var app = {
+//    // Application Constructor
+//    initialize: function() {
+//        this.bindEvents();
+//    },
+//    // Bind Event Listeners
+//    //
+//    // Bind any events that are required on startup. Common events are:
+//    // 'load', 'deviceready', 'offline', and 'online'.
+//    bindEvents: function() {
+//        document.addEventListener('deviceready', this.onDeviceReady, false);
+//    },
+//
+//    // deviceready Event Handler
+//    //
+//    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+//    // function, we must explicity call 'app.receivedEvent(...);'
+//    onDeviceReady: function() {
+//        app.receivedEvent('deviceready');
+//
+//        alert("Device is ready");
+//    },
+//
+//    // Update DOM on a Received Event
+//    receivedEvent: function(id) {
+//
+//        var parentElement = document.getElementById(id);
+//        var listeningElement = parentElement.querySelector('.listening');
+//        var receivedElement = parentElement.querySelector('.received');
+//
+//        listeningElement.setAttribute('style', 'display:none;');
+//        receivedElement.setAttribute('style', 'display:block;');
+//
+//        console.log('Received Event: ' + id);
+//    }
+//};
+//app.initialize();
+
+$.ui.ready(function () {
+    $.ui.removeFooterMenu();
+
+    function takePhoto(barcode) {
+        alert("Take photo for code " + barcode);
+
+        if(typeof cordova === "undefined") {
+            alert("Pictures only work on the app version");
+            return;
+        }
+
+        function onSuccess(imagePath) {
+            window.localStorage.setItem(barcode, imagePath);
+            showPhoto(barcode);
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+
+        navigator.camera.getPicture(onSuccess, onFail,
+            { quality: 100,
+              destinationType: Camera.DestinationType.FILE_URI,
+              sourceType: navigator.camera.PictureSourceType.CAMERA,
+              encodingType: navigator.camera.EncodingType.JPEG,
+              cameraDirection: navigator.camera.Direction.FRONT
+            }
+        );
+    }
+
+    function showPhoto(barcode) {
+        alert("Show photo for " + barcode);
+        $('#face').attr('src', window.localStorage.getItem(barcode));
+    }
+
+    function scanLabel() {
+        if(typeof window.plugins == 'undefined'
+            || typeof window.plugins.barcodeScanner == 'undefined'
+        ) {
+            alert('Unavailable in web client');
+        } else {
+            window.plugins.barcodeScanner.scan(
+                function(result) {
+                    console.log("Scanned barcode " + result.text);
+                    if(window.localStorage.getItem(result.text) === null) {
+                        takePhoto(result.text);
+                    } else {
+                        showPhoto(result.text);
+                    }
+                }, function(error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
+        }
+    }
+
+
+    $('#btnScan').click(function() {
+        scanLabel();
+    });
+});

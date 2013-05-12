@@ -12,7 +12,7 @@ then
     echo No cordova in this build
 else
     cat lib/js/cordova-2.7.0.js > js/all.js
-    cat js/index.js >> js/all.js
+    cat lib/js/barcodescanner.js >> js/all.js
     echo Compiled Cordova into this build
 fi
 cat `php index.php | fgrep -i '<script type="text/javascript" src' | sed 's/.* src=\"//' | sed 's/\?.*//' ` >> js/all.js
@@ -22,7 +22,7 @@ VER=`git describe --abbrev=0`
 echo $VER
 php index.php | fgrep -v 'rel="stylesheet"' | sed 's/charset=utf-8">/charset=utf-8">\
         <link rel="stylesheet" href="css\/all.css" \/>/' \
-        | sed "s/###VERSION###/Version $VER built at `date`/"  > index.tmp
+        | sed "s/###VERSION###/v0.$VER/"  > index.tmp
 
 # Insert optimised JavaSCript
 cat index.tmp | fgrep -v '<script type="text/javascript" src' | sed 's/<\/body>/<script type="text\/javascript" src="js\/all.js"><\/script><\/body>/' > index.html
