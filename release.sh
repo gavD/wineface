@@ -6,10 +6,10 @@ VER=`git describe --abbrev=0`
 popd
 cordova/release
 pushd `pwd`/bin
-jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore -sigalg MD5withRSA -digestalg SHA1 -keystore ../my-release-key.keystore  wineface-release-unsigned.apk wineface
-cp wineface-release-unsigned.apk wineface-$VER.apk
-jarsigner -verify -verbose -certs wineface-$VER.apk
+jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore -sigalg MD5withRSA -digestalg SHA1 -keystore ../my-release-key.keystore  WineFace-release-unsigned.apk WineFace
+cp WineFace-release-unsigned.apk WineFace-$VER.apk
+jarsigner -verify -verbose -certs WineFace-$VER.apk
 popd
 echo Built version $VER
-echo `pwd`/bin/wineface-$VER.apk | xclip -selection clipboard
+echo `pwd`/bin/WineFace-$VER.apk | xclip -selection clipboard
 rm `pwd`/assets/www/index.html
