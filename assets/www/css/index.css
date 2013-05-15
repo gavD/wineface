@@ -29,7 +29,7 @@ button {
     background: #a42e00;
 ;
 }
-#btnScanAgain {
+#btnRetake {
     background: #ffb03b;
     color: #a45100;
 }
@@ -48,6 +48,7 @@ button {
 
 #faceWrapper {
     display: none;
+    margin-bottom: 20px;
 }
 #faceNotes {
     display: none;

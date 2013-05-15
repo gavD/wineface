@@ -7,10 +7,13 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
     font-family: verdana, arial, sans-serif;
     color: #EEE;
 }
+a {
+    color: #fff;
+}
 
 #header {
     padding: 20px;
-    text-size: 1.1em;
+    font-size: 1.1em;
 }
 
 button {
@@ -27,6 +30,11 @@ button {
     background: #a42e00;
 ;
 }
+#btnRetake {
+    background: #ffb03b;
+    color: #a45100;
+}
+
 #btnHelp, #btnHelpRead {
     color: #f4c280;
 }
@@ -40,5 +48,8 @@ button {
 }
 
 #faceWrapper {
+    display: none;
+}
+#faceNotes {
     display: none;
 }

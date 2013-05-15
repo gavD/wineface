@@ -54,7 +54,16 @@
 //};
 //app.initialize();
 
-    function takePhoto(barcode) {
+// todo wrap in closure
+
+    var barcode = null;
+
+    function takePhoto(tmpBarcode) {
+        barcode = tmpBarcode;
+        takePhotoInner();
+    }
+
+    function takePhotoInner() { // TODO rename this
         function onSuccess(imagePath) {
             window.localStorage.setItem(barcode, imagePath);
             showPhoto(barcode);
@@ -107,6 +116,11 @@
 
     $('#btnScan').click(function() {
         scanLabel();
+    });
+
+    // barcode is known, so take the photograph
+    $('#btnRetake').click(function() {
+        takePhotoInner();
     });
 
     $('#btnHelp').click(function() {

@@ -20,7 +20,7 @@
 
                 <div id="faceWrapper">
                     <p id="faceNotes">This was your face last time you drank this!</p>
-                    <button id="btnScanAgain" title="If you don't like this picture, use this!">Take new picture</button>
+                    <button id="btnRetake" title="If you don't like this picture, use this!">Take new picture</button>
                     <img src="" id="face" alt="Your face will appear here" />
                 </div>
 
