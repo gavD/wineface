@@ -54,13 +54,11 @@
 //};
 //app.initialize();
 
-$.ui.ready(function () {
-    $.ui.removeFooterMenu();
-
     function takePhoto(barcode) {
         function onSuccess(imagePath) {
             window.localStorage.setItem(barcode, imagePath);
             showPhoto(barcode);
+            $('#thisWasYourFace').html('Here is your reaction to this wine!');
         }
 
         function onFail(message) {
@@ -79,6 +77,7 @@ $.ui.ready(function () {
 
     function showPhoto(barcode) {
         $('#face').attr('src', window.localStorage.getItem(barcode));
+        $('#faceWrapper').show();
     }
 
     function scanLabel() {
@@ -87,12 +86,16 @@ $.ui.ready(function () {
         ) {
             alert('Unavailable in web client');
         } else {
+            $('#faceWrapper').hide();
+
             window.plugins.barcodeScanner.scan(
                 function(result) {
                     console.log("Scanned barcode " + result.text);
                     if(window.localStorage.getItem(result.text) === null) {
+                        $('#faceNotes').hide();
                         takePhoto(result.text);
                     } else {
+                        $('#faceNotes').html('This was your face last time you drank this!');
                         showPhoto(result.text);
                     }
                 }, function(error) {
@@ -102,8 +105,16 @@ $.ui.ready(function () {
         }
     }
 
-
     $('#btnScan').click(function() {
         scanLabel();
     });
-});
+
+    $('#btnHelp').click(function() {
+        $('#content').hide();
+        $('#instructions').show();
+    });
+
+    $('#btnHelpRead').click(function() {
+        $('#instructions').hide();
+        $('#content').show();
+    });
