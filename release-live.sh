@@ -13,3 +13,4 @@ popd
 echo Built version $VER
 echo `pwd`/bin/WineFace-$VER.apk | xclip -selection clipboard
 rm `pwd`/assets/www/index.html
+zipalign -f -v 4 `pwd`/bin/WineFace-$VER.apk bin/WineFace-al-$VER.apk
